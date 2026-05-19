@@ -1,87 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>life</title>
+<title>❤️ Our Love ❤️</title>
+
+<link rel="stylesheet" href="style.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg, #0f0f14, #1c1c26);
-  color: white;
-}
-header {
-  text-align: center;
-  padding: 28px 16px 20px;
-}
-h1 {
-  margin: 0;
-  font-size: 42px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-.subtitle {
-  margin-top: 8px;
-  color: #d7c3d7;
-  font-size: 15px;
-}
-.gallery {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 10px 14px 40px;
-}
-.card {
-  background: rgba(255,255,255,0.06);
-  border-radius: 24px;
-  overflow: hidden;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  backdrop-filter: blur(10px);
-}
-.card img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.footer {
-  text-align: center;
-  color: #bfa9bf;
-  padding: 20px 10px 40px;
-  font-size: 14px;
-}
-</style>
 </head>
 <body>
-<header>
-  <h1>life</h1>
-  <div class="subtitle">A romantic story in moments ✨</div>
-</header>
 
-<div class="gallery">
-  <div class="card"><img src="life_01.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_02.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_03.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_04.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_05.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_06.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_07.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_08.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_09.jpg" alt="life photo"></div>
-  <div class="card"><img src="life_10.jpg" alt="life photo"></div>
+<div class="hearts"></div>
 
+<div class="container">
+    <h1>❤️ Our Love ❤️</h1>
+    <p class="subtitle">A romantic story in moments ✨</p>
+
+    <div class="counter">
+        Вместе уже <span id="days">137</span> дней ❤️
+    </div>
+
+    <div class="gallery">
+        <img src="life_01.jpg">
+        <img src="life_02.jpg">
+        <img src="life_03.jpg">
+        <img src="life_04.jpg">
+        <img src="life_05.jpg">
+        <img src="life_06.jpg">
+        <img src="life_07.jpg">
+        <img src="life_08.jpg">
+        <img src="life_09.jpg">
+        <img src="life_10.jpg">
+    </div>
 </div>
 
-<div class="footer">
-  Made with love ❤️
-</div>
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-if (window.Telegram && Telegram.WebApp) {
-  Telegram.WebApp.ready();
-  Telegram.WebApp.expand();
-}
+document.addEventListener('click', function () {
+    const music = document.getElementById('bgMusic');
+    music.play().catch(() => {});
+}, { once: true });
 </script>
+
+<script src="script.js"></script>
 </body>
 </html>
