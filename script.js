@@ -6,7 +6,7 @@
 // =======================
 // TIMER (с 3 января 2026)
 // =======================
-const startDate = new Date("2026-01-02T08:35:11");
+const startDate = new Date("2026-01-03T02:35:11");
 
 function updateTimer() {
     const timer = document.getElementById("timer");
