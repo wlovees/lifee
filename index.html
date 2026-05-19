@@ -206,6 +206,227 @@
     <button onclick="startMemoryGame()">Start Game</button>
 </section> 
     
+ /* ==========================================
+   FIX FOR NEW FEATURES
+   Полностью вставь этот код В КОНЕЦ файла script.js
+   НИЧЕГО НЕ УДАЛЯЙ — просто добавь в самый низ.
+   ========================================== */
+
+/* =========================
+   🌍 MULTI LANGUAGE
+   ========================= */
+const translations = {
+    en: {
+        title: "Our Love Story ❤️"
+    },
+    ru: {
+        title: "Наша История Любви ❤️"
+    },
+    ua: {
+        title: "Наша Історія Кохання ❤️"
+    },
+    cz: {
+        title: "Náš Příběh Lásky ❤️"
+    }
+};
+
+function changeLanguage(lang) {
+    localStorage.setItem("loveLanguage", lang);
+
+    const title = document.querySelector("h1");
+    if (title && translations[lang]) {
+        title.textContent = translations[lang].title;
+    }
+
+    alert("Language changed successfully! 🌍");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedLang = localStorage.getItem("loveLanguage") || "en";
+    const selector = document.getElementById("languageSelector");
+
+    if (selector) {
+        selector.value = savedLang;
+    }
+
+    changeLanguage(savedLang);
+    updateWeddingCountdown();
+});
+
+/* =========================
+   🔐 SECRET PASSWORD
+   Password: myqueen
+   ========================= */
+function checkSecretPassword() {
+    const input = document.getElementById("secretPasswordInput");
+
+    if (!input) return;
+
+    const password = input.value.trim().toLowerCase();
+
+    if (password === "myqueen") {
+        alert("💖 Secret unlocked!\n\nYou are the most beautiful girl in the universe ❤️✨");
+        createHeartFireworks();
+    } else {
+        alert("❌ Wrong password!");
+    }
+}
+
+/* =========================
+   🎲 DATE IDEA GENERATOR
+   ========================= */
+function generateDateIdea() {
+    const ideas = [
+        "🌅 Sunset Walk",
+        "🍿 Movie Night",
+        "🍕 Pizza Date",
+        "🌯 С тебя кебаб ❤️",
+        "🧺 Romantic Picnic",
+        "🎳 Bowling Date",
+        "☕ Coffee Together",
+        "🎮 Gaming Night",
+        "🍰 Dessert Date",
+        "🚗 Night Drive"
+    ];
+
+    const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
+    alert("💖 Date Idea:\n\n" + randomIdea);
+}
+
+/* =========================
+   💍 WEDDING COUNTDOWN
+   5 years from now
+   ========================= */
+function updateWeddingCountdown() {
+    const countdown = document.getElementById("weddingCountdown");
+    if (!countdown) return;
+
+    const weddingDate = new Date();
+    weddingDate.setFullYear(weddingDate.getFullYear() + 5);
+
+    function update() {
+        const now = new Date();
+        const diff = weddingDate - now;
+
+        if (diff <= 0) {
+            countdown.textContent = "💍 Today is our wedding day! ❤️";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const years = Math.floor(days / 365);
+        const remainingDays = days % 365;
+
+        countdown.innerHTML =
+            `💍 ${years} years and ${remainingDays} days left until our wedding ❤️`;
+    }
+
+    update();
+    setInterval(update, 1000);
+}
+
+/* =========================
+   🎮 MEMORY GAME
+   ========================= */
+function startMemoryGame() {
+    const emojis = ["💖","💖","❤️","❤️","💕","💕","💘","💘"];
+    emojis.sort(() => Math.random() - 0.5);
+
+    let first = null;
+    let second = null;
+    let lock = false;
+    let matched = 0;
+
+    const gameWindow = window.open("", "_blank", "width=420,height=520");
+
+    gameWindow.document.write(`
+        <html>
+        <head>
+            <title>Memory Game ❤️</title>
+            <style>
+                body {
+                    font-family: Arial;
+                    text-align: center;
+                    background: #1a0026;
+                    color: white;
+                    padding: 20px;
+                }
+                .grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 80px);
+                    gap: 10px;
+                    justify-content: center;
+                    margin-top: 20px;
+                }
+                .card {
+                    width: 80px;
+                    height: 80px;
+                    font-size: 40px;
+                    background: #ff4da6;
+                    border-radius: 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    user-select: none;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>🎮 Memory Game ❤️</h1>
+            <p>Find all matching hearts!</p>
+            <div class="grid" id="grid"></div>
+        </body>
+        </html>
+    `);
+
+    const doc = gameWindow.document;
+    const grid = doc.getElementById("grid");
+
+    emojis.forEach((emoji, index) => {
+        const card = doc.createElement("div");
+        card.className = "card";
+        card.textContent = "❓";
+
+        card.onclick = function () {
+            if (lock || card.textContent !== "❓") return;
+
+            card.textContent = emoji;
+
+            if (!first) {
+                first = { card, emoji };
+                return;
+            }
+
+            second = { card, emoji };
+            lock = true;
+
+            if (first.emoji === second.emoji) {
+                matched += 2;
+                first = null;
+                second = null;
+                lock = false;
+
+                if (matched === emojis.length) {
+                    setTimeout(() => {
+                        gameWindow.alert("🎉 You won! ❤️");
+                    }, 300);
+                }
+            } else {
+                setTimeout(() => {
+                    first.card.textContent = "❓";
+                    second.card.textContent = "❓";
+                    first = null;
+                    second = null;
+                    lock = false;
+                }, 800);
+            }
+        };
+
+        grid.appendChild(card);
+    });
+} 
+            
 <script src="script.js"></script>
 </body>
 </html>
