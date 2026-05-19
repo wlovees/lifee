@@ -947,3 +947,166 @@ document.addEventListener("DOMContentLoaded", function () {
     translateEntireWebsite(savedLang);
   }, 1000);
 });
+
+/* =========================================================
+   💌 365 LOVE MESSAGES + 🌅 GOOD MORNING AT 7:00 + 🔔 DAILY NOTIFICATIONS
+   ВСТАВЬ ЭТО В КОНЕЦ ФАЙЛА script.js
+========================================================= */
+
+// ==========================================
+// 💌 365 ЛЮБОВНЫХ СООБЩЕНИЙ
+// ==========================================
+const loveMessages = [
+  "❤️ Доброе утро, моя любовь! Я люблю тебя больше всего на свете.",
+  "🌹 Ты — самое прекрасное, что случилось в моей жизни.",
+  "💖 С каждым днём я люблю тебя всё сильнее.",
+  "✨ Ты делаешь мой мир ярче.",
+  "💋 Я посылаю тебе тысячи поцелуев.",
+  "🤗 Мои объятия всегда рядом с тобой.",
+  "🌙 Даже во сне я думаю о тебе.",
+  "☀️ Ты — моё солнце и моя радость.",
+  "💍 Я хочу провести с тобой всю жизнь.",
+  "💘 Моё сердце принадлежит только тебе.",
+  "🌸 Ты самая красивая девушка в мире.",
+  "🎵 Твой голос — моя любимая мелодия.",
+  "🏡 Рядом с тобой я чувствую себя дома.",
+  "💎 Ты бесценна для меня.",
+  "🌈 Ты раскрашиваешь мою жизнь яркими красками.",
+  "💞 Ты — моя судьба.",
+  "🌹 Я благодарен за каждый день с тобой.",
+  "❤️ Ты — смысл моей жизни.",
+  "💖 Моё счастье начинается с тебя.",
+  "🌟 Ты — моя звезда.",
+  // Автоматически дополняем до 365 сообщений
+];
+
+// Дополняем массив до 365 сообщений
+for (let i = loveMessages.length + 1; i <= 365; i++) {
+  loveMessages.push(`💖 День ${i}: Я люблю тебя всё сильнее с каждым днём ❤️`);
+}
+
+// ==========================================
+// 📅 ПОЛУЧИТЬ СООБЩЕНИЕ ДНЯ
+// ==========================================
+function getTodayLoveMessage() {
+  const startDate = new Date(2026, 05, 20); // 1 января 2025
+  const today = new Date();
+  const diffDays = Math.floor(
+    (today - startDate) / (1000 * 60 * 60 * 24)
+  );
+  const index = diffDays % 365;
+  return loveMessages[index];
+}
+
+// ==========================================
+// 🌅 УТРЕННЕЕ ПРИВЕТСТВИЕ В 7:00
+// ==========================================
+function showGoodMorningMessage() {
+  const now = new Date();
+  const lastShown = localStorage.getItem("lastMorningMessage");
+  const today = now.toDateString();
+
+  if (now.getHours() >= 7 && lastShown !== today) {
+    const message = getTodayLoveMessage();
+
+    setTimeout(() => {
+      alert("🌅 Доброе утро, любимая!\n\n" + message);
+    }, 2000);
+
+    localStorage.setItem("lastMorningMessage", today);
+  }
+}
+
+// ==========================================
+// 🔔 ЗАПРОС РАЗРЕШЕНИЯ НА УВЕДОМЛЕНИЯ
+// ==========================================
+function requestNotificationPermission() {
+  if (!("Notification" in window)) return;
+
+  if (Notification.permission === "default") {
+    Notification.requestPermission();
+  }
+}
+
+// ==========================================
+// 🔔 ПОКАЗАТЬ УВЕДОМЛЕНИЕ
+// ==========================================
+function showDailyNotification() {
+  if (!("Notification" in window)) return;
+  if (Notification.permission !== "granted") return;
+
+  const message = getTodayLoveMessage();
+
+  new Notification("❤️ Доброе утро, любимая!", {
+    body: message,
+    icon: "icon-192.png",
+    badge: "icon-192.png"
+  });
+}
+
+// ==========================================
+// ⏰ ПРОВЕРКА ВРЕМЕНИ (7:00)
+// ==========================================
+function checkMorningNotification() {
+  const now = new Date();
+  const today = now.toDateString();
+  const lastNotification = localStorage.getItem("lastNotificationDate");
+
+  if (
+    now.getHours() === 7 &&
+    now.getMinutes() === 0 &&
+    lastNotification !== today
+  ) {
+    showDailyNotification();
+    localStorage.setItem("lastNotificationDate", today);
+  }
+}
+
+// ==========================================
+// 💌 ПОКАЗАТЬ СООБЩЕНИЕ ДНЯ НА САЙТЕ
+// ==========================================
+function addDailyLoveMessageToPage() {
+  if (document.getElementById("dailyLoveMessage")) return;
+
+  const container = document.querySelector(".container");
+  if (!container) return;
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.id = "dailyLoveMessage";
+
+  card.innerHTML = `
+    <h2>💌 Message of the Day</h2>
+    <p style="font-size: 1.2rem; line-height: 1.8;">
+      ${getTodayLoveMessage()}
+    </p>
+  `;
+
+  // Добавляем после таймера
+  const timerBox = document.querySelector(".timer-box");
+  if (timerBox && timerBox.nextSibling) {
+    timerBox.parentNode.insertBefore(card, timerBox.nextSibling);
+  } else {
+    container.appendChild(card);
+  }
+}
+
+// ==========================================
+// 🚀 ИНИЦИАЛИЗАЦИЯ
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  // Добавляем сообщение дня на сайт
+  addDailyLoveMessageToPage();
+
+  // Запрашиваем разрешение на уведомления
+  requestNotificationPermission();
+
+  // Показываем приветствие после 7:00 один раз в день
+  showGoodMorningMessage();
+
+  // Проверяем каждую минуту, наступило ли 7:00
+  setInterval(checkMorningNotification, 60000);
+
+  // Проверяем сразу при загрузке
+  checkMorningNotification();
+});
