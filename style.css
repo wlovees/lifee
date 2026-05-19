@@ -283,3 +283,4 @@ li {
     will-change: transform, opacity;
     filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.9));
 }
+heart.className = "floating-heart";
