@@ -248,3 +248,29 @@ li {
         border-radius: 25px;
     }
 }
+.floating-heart {
+    position: fixed;
+    top: -50px;
+    z-index: 99999;          /* Поверх всех элементов */
+    pointer-events: none;
+    user-select: none;
+
+    animation: fall linear forwards;
+    filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.9));
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
