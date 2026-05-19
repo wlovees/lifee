@@ -1,128 +1,116 @@
-<section class="gallery">
-  <h2>📸 Our Beautiful Memories</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 Our Love 💖</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <div class="photo-card">
-    <img src="life_01.jpg" alt="Memory 1">
-    <p>"Your eyes are my favorite universe." ✨</p>
-  </div>
+<!-- Звездное небо -->
+<div id="stars"></div>
 
-  <div class="photo-card">
-    <img src="life_02.jpg" alt="Memory 2">
-    <p>"Every sunset is more beautiful with you." 🌅</p>
-  </div>
+<!-- Падающие сердечки -->
+<div class="hearts-container"></div>
 
-  <div class="photo-card">
-    <img src="life_03.jpg" alt="Memory 3">
-    <p>"Your smile heals my soul." 💖</p>
-  </div>
+<!-- Музыка -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="photo-card">
-    <img src="life_04.jpg" alt="Memory 4">
-    <p>"You are the sweetest part of my life." 🍭</p>
-  </div>
+<!-- Кнопка музыки -->
+<button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
 
-  <div class="photo-card">
-    <img src="life_05.jpg" alt="Memory 5">
-    <p>"In your arms, I found my home." 🏡</p>
-  </div>
+<!-- Основной контейнер -->
+<div class="container">
 
-  <div class="photo-card">
-    <img src="life_06.jpg" alt="Memory 6">
-    <p>"Two hearts, one love." ❤️</p>
-  </div>
+    <!-- Заголовок -->
+    <h1>💖 Our Love 💖</h1>
+    <p class="subtitle">A romantic story written in the stars ✨</p>
 
-  <div class="photo-card">
-    <img src="life_07.jpg" alt="Memory 7">
-    <p>"With you, every city shines brighter." 🌃</p>
-  </div>
+    <!-- Таймер -->
+    <div class="timer-box">
+        <h2>⏳ Together Since December 31, 2024</h2>
+        <div id="timer">Loading...</div>
+    </div>
 
-  <div class="photo-card">
-    <img src="life_08.jpg" alt="Memory 8">
-    <p>"A kiss under the endless sky." 🌌</p>
-  </div>
+    <!-- Любовное письмо -->
+    <div class="card">
+        <h2>💌 Love Letter</h2>
+        <p>
+            My love, every day with you feels like a dream.
+            Your smile lights up my world, your voice calms my heart,
+            and your love makes my life complete.
+            No matter where life takes us, I promise to love you,
+            protect you, and choose you every single day.
+            You are my favorite person, my happiness, and my forever. ❤️
+        </p>
+    </div>
 
-  <div class="photo-card">
-    <img src="life_09.jpg" alt="Memory 9">
-    <p>"You are my dream come true." 💫</p>
-  </div>
+    <!-- Причины любви -->
+    <div class="card">
+        <h2>💖 Reasons Why I Love You</h2>
+        <ul>
+            <li>Your beautiful smile</li>
+            <li>Your kind heart</li>
+            <li>The way you make me happy</li>
+            <li>Your cute voice</li>
+            <li>Your hugs feel like home</li>
+            <li>You understand me</li>
+            <li>You are my best friend</li>
+            <li>You make every day special</li>
+            <li>Your eyes are magical</li>
+            <li>I love everything about you</li>
+        </ul>
+    </div>
 
-  <div class="photo-card">
-    <img src="life_10.jpg" alt="Memory 10">
-    <p>"Every moment with you is magic." ✨</p>
-  </div>
+    <!-- Обещание -->
+    <div class="card">
+        <h2>🤍 My Promise</h2>
+        <p>
+            I promise to stand by your side, to support you,
+            to make you laugh, to wipe your tears,
+            and to love you endlessly.
+            Today, tomorrow, and forever. 🌙✨
+        </p>
+    </div>
 
-  <div class="photo-card">
-    <img src="life_11.jpg" alt="Memory 11">
-    <p>"Our love glows in every color." 🌈</p>
-  </div>
+    <!-- Галерея -->
+    <section class="gallery">
+        <h2>📸 Our Beautiful Memories</h2>
 
-  <div class="photo-card">
-    <img src="life_12.jpg" alt="Memory 12">
-    <p>"You are my happy place." 🥰</p>
-  </div>
+        <div class="photo-card"><img src="life_01.jpg"><p>"Your eyes are my favorite universe." ✨</p></div>
+        <div class="photo-card"><img src="life_02.jpg"><p>"Every sunset is more beautiful with you." 🌅</p></div>
+        <div class="photo-card"><img src="life_03.jpg"><p>"Your smile heals my soul." ❤️</p></div>
+        <div class="photo-card"><img src="life_04.jpg"><p>"You are the sweetest part of my life." 🍭</p></div>
+        <div class="photo-card"><img src="life_05.jpg"><p>"In your arms, I found my home." 🏡</p></div>
+        <div class="photo-card"><img src="life_06.jpg"><p>"Two hearts, one love." 💞</p></div>
+        <div class="photo-card"><img src="life_07.jpg"><p>"Every memory with you is priceless." 💎</p></div>
+        <div class="photo-card"><img src="life_08.jpg"><p>"You make my world brighter." ☀️</p></div>
+        <div class="photo-card"><img src="life_09.jpg"><p>"Our love is pure magic." ✨</p></div>
+        <div class="photo-card"><img src="life_10.jpg"><p>"I fall for you every day." 💘</p></div>
+        <div class="photo-card"><img src="life_11.jpg"><p>"My favorite place is next to you." 🤍</p></div>
+        <div class="photo-card"><img src="life_12.jpg"><p>"Every kiss feels like heaven." 😘</p></div>
+        <div class="photo-card"><img src="life_13.jpg"><p>"Forever starts with you." 💍</p></div>
+        <div class="photo-card"><img src="life_14.jpg"><p>"You are my safe place." 🕊️</p></div>
+        <div class="photo-card"><img src="life_15.jpg"><p>"Your love changed my life." 🌹</p></div>
+        <div class="photo-card"><img src="life_16.jpg"><p>"I choose you always." 💖</p></div>
+        <div class="photo-card"><img src="life_17.jpg"><p>"Our story is my favorite." 📖</p></div>
+        <div class="photo-card"><img src="life_18.jpg"><p>"You are my sunshine." ☀️</p></div>
+        <div class="photo-card"><img src="life_19.jpg"><p>"I love your beautiful soul." 🌙</p></div>
+        <div class="photo-card"><img src="life_20.jpg"><p>"Together is my favorite place." 🏠</p></div>
+        <div class="photo-card"><img src="life_21.jpg"><p>"Your laugh is my favorite melody." 🎵</p></div>
+        <div class="photo-card"><img src="life_22.jpg"><p>"My heart belongs to you." ❤️</p></div>
+        <div class="photo-card"><img src="life_23.jpg"><p>"You complete me." 💞</p></div>
+        <div class="photo-card"><img src="life_24.jpg"><p>"Every day with you is special." ✨</p></div>
+        <div class="photo-card"><img src="life_25.jpg"><p>"I love you endlessly." ♾️</p></div>
+    </section>
 
-  <div class="photo-card">
-    <img src="life_13.jpg" alt="Memory 13">
-    <p>"Your laughter is my favorite song." 🎵</p>
-  </div>
+</div>
 
-  <div class="photo-card">
-    <img src="life_14.jpg" alt="Memory 14">
-    <p>"Every adventure is better with you." 🚀</p>
-  </div>
+<!-- Скрипт -->
+<script src="script.js"></script>
 
-  <div class="photo-card">
-    <img src="life_15.jpg" alt="Memory 15">
-    <p>"I love the way you look at me." 👀❤️</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_16.jpg" alt="Memory 16">
-    <p>"Together, we create unforgettable memories." 📸</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_17.jpg" alt="Memory 17">
-    <p>"You are my sunshine on cloudy days." ☀️</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_18.jpg" alt="Memory 18">
-    <p>"Your love makes everything beautiful." 🌸</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_19.jpg" alt="Memory 19">
-    <p>"Every heartbeat whispers your name." 💓</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_20.jpg" alt="Memory 20">
-    <p>"You are my forever and always." ♾️</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_21.jpg" alt="Memory 21">
-    <p>"Love looks perfect on us." 💑</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_22.jpg" alt="Memory 22">
-    <p>"Our story is my favorite story." 📖❤️</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_23.jpg" alt="Memory 23">
-    <p>"You are my heart's safest place." 🔐❤️</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_24.jpg" alt="Memory 24">
-    <p>"Every second with you is precious." ⏳💖</p>
-  </div>
-
-  <div class="photo-card">
-    <img src="life_25.jpg" alt="Memory 25">
-    <p>"I will love you forever and beyond." 🌙✨</p>
-  </div>
-</section>
+</body>
+</html>
