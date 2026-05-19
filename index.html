@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff4d88">
+<link rel="apple-touch-icon" href="icon-192.png">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💖 Our Love 💖</title>
 <link rel="stylesheet" href="style.css">
 </head>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js');
+  });
+}
+</script>
 <body>
 
 <!-- Звездное небо -->
