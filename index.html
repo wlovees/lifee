@@ -149,6 +149,63 @@
     <button onclick="toggleDayNight()">🌙 Day / Night Mode</button>
 </section>
     
+<!-- 🌍 Language Switcher -->
+<section class="card center">
+    <h2>🌍 Language / Язык / Мова / Jazyk</h2>
+    <select id="languageSelector" onchange="changeLanguage(this.value)">
+        <option value="en">🇬🇧 English</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="ua">🇺🇦 Українська</option>
+        <option value="cz">🇨🇿 Čeština</option>
+    </select>
+</section>
+
+<!-- 🔐 Secret Password Section -->
+<section class="card center">
+    <h2>🔐 Secret Password</h2>
+    <p>Enter the secret password to unlock a hidden message ❤️</p>
+    <input type="password" id="secretPasswordInput"
+           placeholder="Enter password..."
+           style="padding:12px;border-radius:10px;border:none;margin:10px;">
+    <br>
+    <button onclick="checkSecretPassword()">Unlock Secret</button>
+</section>
+
+<!-- 🎵 Spotify Playlist -->
+<section class="card center">
+    <h2>🎵 Ukrainian Love Playlist</h2>
+    <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0XUsuxWHRQd"
+        width="100%" height="352" frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+    </iframe>
+</section>
+
+<!-- 🎲 Date Idea Generator -->
+<section class="card center">
+    <h2>🎲 Date Idea Generator</h2>
+    <p>Click to get a romantic date idea ❤️</p>
+    <button onclick="generateDateIdea()">Generate Date Idea</button>
+</section>
+
+<!-- 💍 Wedding Countdown -->
+<section class="card center">
+    <h2>💍 Countdown to Our Wedding</h2>
+    <div id="weddingCountdown"
+         style="font-size:1.5rem;font-weight:bold;margin-top:15px;">
+        Loading...
+    </div>
+</section>
+
+<!-- 🎮 Memory Game -->
+<section class="card center">
+    <h2>🎮 Memory Game</h2>
+    <p>Find matching hearts ❤️</p>
+    <button onclick="startMemoryGame()">Start Game</button>
+</section> 
+    
 <script src="script.js"></script>
 </body>
 </html>
