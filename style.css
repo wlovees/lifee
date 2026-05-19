@@ -274,3 +274,12 @@ li {
         opacity: 0;
     }
 }
+.floating-heart {
+    position: fixed;
+    top: 100vh;
+    z-index: 99999; /* Поверх всех фото и карточек */
+    pointer-events: none;
+    user-select: none;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.9));
+}
