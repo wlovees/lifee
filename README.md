@@ -1,21 +1,10 @@
-
 # life Telegram Mini App
 
-Готовое романтическое мини-приложение для Telegram Web App.
+1. Upload all files to your GitHub repository.
+2. Enable GitHub Pages in Settings → Pages.
+3. Select Deploy from a branch → main → /(root).
+4. Wait 1-2 minutes.
+5. Your site will be available at:
+   https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/
+6. Set this URL in BotFather as the Web App URL.
 
-## Возможности
-- Фоновая музыка
-- Анимация сердечек
-- Надпись "137 дней"
-- Автоматический счетчик времени вместе
-
-## Публикация на GitHub Pages
-1. Загрузите все файлы в репозиторий.
-2. Settings → Pages.
-3. Branch: `main`, Folder: `/root`.
-4. Сохраните.
-
-## Подключение к Telegram
-Через @BotFather:
-`/setmenubutton`
-Укажите URL GitHub Pages.
