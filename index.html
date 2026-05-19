@@ -4,47 +4,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>❤️ Our Love ❤️</title>
-
-<link rel="stylesheet" href="style.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #0f0f14, #1a1a2e);
+    color: white;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #d8b4fe;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.counter {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px;
+    color: #ff9ecf;
+    font-weight: bold;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 28px;
+    display: block;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 24px;
+    animation: float 6s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+</style>
 </head>
 <body>
 
-<div class="hearts"></div>
-
-<div class="container">
+<header>
     <h1>❤️ Our Love ❤️</h1>
     <p class="subtitle">A romantic story in moments ✨</p>
+</header>
 
-    <div class="counter">
-        Вместе уже <span id="days">137</span> дней ❤️
-    </div>
-
-    <div class="gallery">
-        <img src="life_01.jpg">
-        <img src="life_02.jpg">
-        <img src="life_03.jpg">
-        <img src="life_04.jpg">
-        <img src="life_05.jpg">
-        <img src="life_06.jpg">
-        <img src="life_07.jpg">
-        <img src="life_08.jpg">
-        <img src="life_09.jpg">
-        <img src="life_10.jpg">
-    </div>
+<div class="counter">
+    Вместе уже <span id="days">137</span> дней ❤️
 </div>
 
-<audio id="bgMusic" loop>
+<div class="gallery">
+    <img src="life_01.jpg">
+    <img src="life_02.jpg">
+    <img src="life_03.jpg">
+    <img src="life_04.jpg">
+    <img src="life_05.jpg">
+    <img src="life_06.jpg">
+    <img src="life_07.jpg">
+    <img src="life_08.jpg">
+    <img src="life_09.jpg">
+    <img src="life_10.jpg">
+</div>
+
+<audio id="music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.addEventListener('click', function () {
-    const music = document.getElementById('bgMusic');
+// Telegram WebApp
+if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+}
+
+// Сердечки
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 500);
+
+// Автозапуск музыки после первого касания
+document.addEventListener('click', () => {
+    const music = document.getElementById('music');
     music.play().catch(() => {});
 }, { once: true });
 </script>
 
-<script src="script.js"></script>
 </body>
 </html>
