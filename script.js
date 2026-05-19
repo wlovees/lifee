@@ -339,3 +339,195 @@ document.addEventListener("DOMContentLoaded", function () {
     // Небольшой приветственный эффект
     setTimeout(createHeartFireworks, 1500);
 });
+
+// ==========================================
+// NEW FEATURES FOR LOVE WEBSITE
+// ВСТАВИТЬ В САМЫЙ КОНЕЦ script.js
+// ==========================================
+
+// 🌍 Переводы
+const translations = {
+    en: "Our Love Story ❤️",
+    ru: "Наша История Любви ❤️",
+    ua: "Наша Історія Кохання ❤️",
+    cz: "Náš Příběh Lásky ❤️"
+};
+
+// 🌍 Смена языка
+function changeLanguage(lang) {
+    localStorage.setItem("loveLanguage", lang);
+
+    const title = document.querySelector("h1");
+    if (title && translations[lang]) {
+        title.textContent = translations[lang];
+    }
+
+    alert("🌍 Language changed!");
+}
+
+// 🔐 Проверка пароля
+function checkSecretPassword() {
+    const input = document.getElementById("secretPasswordInput");
+    if (!input) return;
+
+    if (input.value.trim().toLowerCase() === "myqueen") {
+        alert("💖 Secret unlocked!\n\nYou are my queen forever ❤️👑");
+    } else {
+        alert("❌ Wrong password!");
+    }
+}
+
+// 🎲 Генератор идей для свиданий
+function generateDateIdea() {
+    const ideas = [
+        "🌅 Прогулка на закате",
+        "🍿 Кино-вечер",
+        "🍕 Свидание с пиццей",
+        "🌯 С тебя кебаб ❤️",
+        "🧺 Романтический пикник",
+        "🎳 Боулинг",
+        "☕ Кофе вместе",
+        "🚗 Ночная поездка",
+        "🍰 Десертное свидание",
+        "🎮 Игровой вечер"
+    ];
+
+    const idea = ideas[Math.floor(Math.random() * ideas.length)];
+    alert("💖 Идея для свидания:\n\n" + idea);
+}
+
+// 💍 Таймер до свадьбы (5 лет)
+function updateWeddingCountdown() {
+    const el = document.getElementById("weddingCountdown");
+    if (!el) return;
+
+    const weddingDate = new Date();
+    weddingDate.setFullYear(weddingDate.getFullYear() + 5);
+
+    function update() {
+        const now = new Date();
+        const diff = weddingDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const years = Math.floor(days / 365);
+        const remainingDays = days % 365;
+
+        el.innerHTML =
+            `💍 ${years} years and ${remainingDays} days left until our wedding ❤️`;
+    }
+
+    update();
+    setInterval(update, 1000);
+}
+
+// 🎮 Игра на поиск одинаковых сердечек
+function startMemoryGame() {
+    const emojis = ["💖","💖","❤️","❤️","💕","💕","💘","💘"];
+    emojis.sort(() => Math.random() - 0.5);
+
+    let first = null;
+    let second = null;
+    let lock = false;
+    let matched = 0;
+
+    const win = window.open("", "_blank", "width=450,height=550");
+
+    win.document.write(`
+        <html>
+        <head>
+        <title>Memory Game ❤️</title>
+        <style>
+            body {
+                font-family: Arial;
+                text-align: center;
+                background: #1a0026;
+                color: white;
+                padding: 20px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(4, 80px);
+                gap: 10px;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .card {
+                width: 80px;
+                height: 80px;
+                background: #ff4da6;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 40px;
+                cursor: pointer;
+                user-select: none;
+            }
+        </style>
+        </head>
+        <body>
+            <h1>🎮 Memory Game ❤️</h1>
+            <p>Find all matching hearts!</p>
+            <div class="grid" id="grid"></div>
+        </body>
+        </html>
+    `);
+
+    const grid = win.document.getElementById("grid");
+
+    emojis.forEach((emoji) => {
+        const card = win.document.createElement("div");
+        card.className = "card";
+        card.textContent = "❓";
+
+        card.onclick = function () {
+            if (lock || card.textContent !== "❓") return;
+
+            card.textContent = emoji;
+
+            if (!first) {
+                first = { card, emoji };
+                return;
+            }
+
+            second = { card, emoji };
+            lock = true;
+
+            if (first.emoji === second.emoji) {
+                matched += 2;
+                first = null;
+                second = null;
+                lock = false;
+
+                if (matched === emojis.length) {
+                    setTimeout(() => {
+                        win.alert("🎉 You won! ❤️");
+                    }, 300);
+                }
+            } else {
+                setTimeout(() => {
+                    first.card.textContent = "❓";
+                    second.card.textContent = "❓";
+                    first = null;
+                    second = null;
+                    lock = false;
+                }, 800);
+            }
+        };
+
+        grid.appendChild(card);
+    });
+}
+
+// 🚀 Автозапуск после загрузки страницы
+document.addEventListener("DOMContentLoaded", function () {
+    const savedLang = localStorage.getItem("loveLanguage") || "en";
+    const selector = document.getElementById("languageSelector");
+
+    if (selector) {
+        selector.value = savedLang;
+        changeLanguage(savedLang);
+    }
+
+    updateWeddingCountdown();
+});
