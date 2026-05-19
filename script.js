@@ -1110,3 +1110,51 @@ document.addEventListener("DOMContentLoaded", function () {
   // Проверяем сразу при загрузке
   checkMorningNotification();
 });
+
+function showProposal() {
+    const answer = confirm(
+        "💍 My Love,\n\n" +
+        "From the moment you came into my life, everything became more beautiful.\n" +
+        "You are my happiness, my best friend, and my forever.\n\n" +
+        "Will you marry me? ❤️"
+    );
+
+    if (answer) {
+        alert(
+            "💖 YES! 💖\n\n" +
+            "This is the happiest moment of my life.\n" +
+            "I promise to love you forever and ever. 💍❤️"
+        );
+
+        startProposalCelebration();
+    } else {
+        alert("❤️ No matter what, I will always love you forever. ❤️");
+    }
+}
+
+function startProposalCelebration() {
+    for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.innerHTML = "💖";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "100vh";
+            heart.style.fontSize = (Math.random() * 30 + 20) + "px";
+            heart.style.zIndex = "9999";
+            heart.style.pointerEvents = "none";
+            heart.style.transition = "all 4s ease-out";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.top = "-10vh";
+                heart.style.opacity = "0";
+            }, 50);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4500);
+        }, i * 100);
+    }
+}
