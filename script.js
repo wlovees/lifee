@@ -677,3 +677,273 @@ document.addEventListener("DOMContentLoaded", function () {
         translateEntirePage(savedLang);
     }, 500);
 });
+
+/* =====================================================
+   🌍 ПОЛНЫЙ КОД ДЛЯ ПЕРЕВОДА ВСЕГО САЙТА
+   ВСТАВЬ ЭТО В САМЫЙ КОНЕЦ ФАЙЛА script.js
+   НЕ УДАЛЯЙ существующие функции (таймер, музыка, игры)
+===================================================== */
+
+// ==========================================
+// 🌍 ПОЛНЫЙ СЛОВАРЬ ПЕРЕВОДОВ
+// ==========================================
+const BASE_TEXTS = {
+  // Основные тексты
+  "🎵 Play Music": {
+    en: "🎵 Play Music",
+    ru: "🎵 Включить музыку",
+    ua: "🎵 Увімкнути музику",
+    cz: "🎵 Přehrát hudbu"
+  },
+
+  "💖 Our Love 💖": {
+    en: "💖 Our Love 💖",
+    ru: "💖 Наша Любовь 💖",
+    ua: "💖 Наше Кохання 💖",
+    cz: "💖 Naše Láska 💖"
+  },
+
+  "A romantic story written in the stars ✨": {
+    en: "A romantic story written in the stars ✨",
+    ru: "Романтическая история, написанная звёздами ✨",
+    ua: "Романтична історія, написана зірками ✨",
+    cz: "Romantický příběh napsaný ve hvězdách ✨"
+  },
+
+  "⏳ Together Since January 3, 2026": {
+    en: "⏳ Together Since January 3, 2026",
+    ru: "⏳ Вместе с 3 января 2026",
+    ua: "⏳ Разом з 3 січня 2026",
+    cz: "⏳ Spolu od 3. ledna 2026"
+  },
+
+  "Loading...": {
+    en: "Loading...",
+    ru: "Загрузка...",
+    ua: "Завантаження...",
+    cz: "Načítání..."
+  },
+
+  "💌 Love Letter": {
+    en: "💌 Love Letter",
+    ru: "💌 Любовное письмо",
+    ua: "💌 Любовний лист",
+    cz: "💌 Milostný dopis"
+  },
+
+  "💖 Reasons Why I Love You": {
+    en: "💖 Reasons Why I Love You",
+    ru: "💖 Причины, почему я тебя люблю",
+    ua: "💖 Причини, чому я тебе кохаю",
+    cz: "💖 Důvody, proč tě miluji"
+  },
+
+  "🤍 My Promise": {
+    en: "🤍 My Promise",
+    ru: "🤍 Моё обещание",
+    ua: "🤍 Моя обіцянка",
+    cz: "🤍 Můj slib"
+  },
+
+  "📸 Our Beautiful Memories": {
+    en: "📸 Our Beautiful Memories",
+    ru: "📸 Наши прекрасные воспоминания",
+    ua: "📸 Наші прекрасні спогади",
+    cz: "📸 Naše krásné vzpomínky"
+  },
+
+  // Кнопки и разделы
+  "🔐 Open My Secret": {
+    en: "🔐 Open My Secret",
+    ru: "🔐 Открой мой секрет",
+    ua: "🔐 Відкрий мій секрет",
+    cz: "🔐 Otevři mé tajemství"
+  },
+
+  "🎥 Video Surprise": {
+    en: "🎥 Video Surprise",
+    ru: "🎥 Видео сюрприз",
+    ua: "🎥 Відео сюрприз",
+    cz: "🎥 Video překvapení"
+  },
+
+  "💍 Will You Stay With Me Forever?": {
+    en: "💍 Will You Stay With Me Forever?",
+    ru: "💍 Ты останешься со мной навсегда?",
+    ua: "💍 Ти залишишся зі мною назавжди?",
+    cz: "💍 Zůstaneš se mnou navždy?"
+  },
+
+  "✨ Special Surprises ✨": {
+    en: "✨ Special Surprises ✨",
+    ru: "✨ Особенные сюрпризы ✨",
+    ua: "✨ Особливі сюрпризи ✨",
+    cz: "✨ Speciální překvapení ✨"
+  },
+
+  "Click the buttons below for romantic surprises ❤️": {
+    en: "Click the buttons below for romantic surprises ❤️",
+    ru: "Нажми на кнопки ниже для романтических сюрпризов ❤️",
+    ua: "Натисни кнопки нижче для романтичних сюрпризів ❤️",
+    cz: "Klikni na tlačítka níže pro romantická překvapení ❤️"
+  },
+
+  "🔐 Secret Password": {
+    en: "🔐 Secret Password",
+    ru: "🔐 Секретный пароль",
+    ua: "🔐 Секретний пароль",
+    cz: "🔐 Tajné heslo"
+  },
+
+  "Enter the secret password to unlock a hidden message ❤️": {
+    en: "Enter the secret password to unlock a hidden message ❤️",
+    ru: "Введите секретный пароль, чтобы открыть скрытое сообщение ❤️",
+    ua: "Введіть секретний пароль, щоб відкрити приховане повідомлення ❤️",
+    cz: "Zadej tajné heslo pro odemknutí skryté zprávy ❤️"
+  },
+
+  "Enter password...": {
+    en: "Enter password...",
+    ru: "Введите пароль...",
+    ua: "Введіть пароль...",
+    cz: "Zadejte heslo..."
+  },
+
+  "Unlock Secret": {
+    en: "Unlock Secret",
+    ru: "Открыть секрет",
+    ua: "Відкрити секрет",
+    cz: "Odemknout tajemství"
+  },
+
+  "🎵 Ukrainian Love Playlist": {
+    en: "🎵 Ukrainian Love Playlist",
+    ru: "🎵 Украинский романтический плейлист",
+    ua: "🎵 Український романтичний плейлист",
+    cz: "🎵 Ukrajinský romantický playlist"
+  },
+
+  "🎲 Date Idea Generator": {
+    en: "🎲 Date Idea Generator",
+    ru: "🎲 Генератор идей для свиданий",
+    ua: "🎲 Генератор ідей для побачень",
+    cz: "🎲 Generátor nápadů na rande"
+  },
+
+  "Click to get a romantic date idea ❤️": {
+    en: "Click to get a romantic date idea ❤️",
+    ru: "Нажми, чтобы получить романтическую идею для свидания ❤️",
+    ua: "Натисни, щоб отримати романтичну ідею для побачення ❤️",
+    cz: "Klikni pro romantický nápad na rande ❤️"
+  },
+
+  "Generate Date Idea": {
+    en: "Generate Date Idea",
+    ru: "Сгенерировать идею",
+    ua: "Згенерувати ідею",
+    cz: "Vygenerovat nápad"
+  },
+
+  "💍 Countdown to Our Wedding": {
+    en: "💍 Countdown to Our Wedding",
+    ru: "💍 Обратный отсчёт до нашей свадьбы",
+    ua: "💍 Відлік до нашого весілля",
+    cz: "💍 Odpočet do naší svatby"
+  },
+
+  "🎮 Memory Game": {
+    en: "🎮 Memory Game",
+    ru: "🎮 Игра на память",
+    ua: "🎮 Гра на пам'ять",
+    cz: "🎮 Paměťová hra"
+  },
+
+  "Find matching hearts ❤️": {
+    en: "Find matching hearts ❤️",
+    ru: "Найди одинаковые сердечки ❤️",
+    ua: "Знайди однакові сердечка ❤️",
+    cz: "Najdi stejná srdíčka ❤️"
+  },
+
+  "Start Game": {
+    en: "Start Game",
+    ru: "Начать игру",
+    ua: "Почати гру",
+    cz: "Začít hru"
+  }
+};
+
+// ==========================================
+// 🌍 СОХРАНЕНИЕ ОРИГИНАЛЬНОГО ТЕКСТА
+// ==========================================
+function saveAllOriginalTexts() {
+  document.querySelectorAll("*").forEach(el => {
+    if (["SCRIPT", "STYLE", "IFRAME"].includes(el.tagName)) return;
+
+    if (el.children.length === 0) {
+      const text = el.textContent.trim();
+      if (text && !el.dataset.originalText) {
+        el.dataset.originalText = text;
+      }
+    }
+
+    if (el.placeholder && !el.dataset.originalPlaceholder) {
+      el.dataset.originalPlaceholder = el.placeholder;
+    }
+  });
+}
+
+// ==========================================
+// 🌍 ПЕРЕВОД САЙТА
+// ==========================================
+function translateEntireWebsite(lang) {
+  document.querySelectorAll("*").forEach(el => {
+    if (["SCRIPT", "STYLE", "IFRAME"].includes(el.tagName)) return;
+
+    if (el.dataset.originalText) {
+      const original = el.dataset.originalText.trim();
+      if (BASE_TEXTS[original] && BASE_TEXTS[original][lang]) {
+        el.textContent = BASE_TEXTS[original][lang];
+      } else {
+        el.textContent = original;
+      }
+    }
+
+    if (el.dataset.originalPlaceholder) {
+      const original = el.dataset.originalPlaceholder.trim();
+      if (BASE_TEXTS[original] && BASE_TEXTS[original][lang]) {
+        el.placeholder = BASE_TEXTS[original][lang];
+      } else {
+        el.placeholder = original;
+      }
+    }
+  });
+}
+
+// ==========================================
+// 🌍 СМЕНА ЯЗЫКА
+// ==========================================
+function changeLanguage(lang) {
+  localStorage.setItem("loveLanguage", lang);
+  translateEntireWebsite(lang);
+}
+
+// ==========================================
+// 🚀 АВТОЗАПУСК
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+  saveAllOriginalTexts();
+
+  const savedLang = localStorage.getItem("loveLanguage") || "en";
+
+  const selector = document.getElementById("languageSelector");
+  if (selector) {
+    selector.value = savedLang;
+  }
+
+  // Повторно сохраняем тексты после загрузки таймеров и динамического контента
+  setTimeout(() => {
+    saveAllOriginalTexts();
+    translateEntireWebsite(savedLang);
+  }, 1000);
+});
