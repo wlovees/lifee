@@ -531,3 +531,149 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateWeddingCountdown();
 });
+
+// ==========================================
+// 🌍 FULL SITE TRANSLATION SYSTEM
+// ВСТАВЬ ЭТО В САМЫЙ КОНЕЦ script.js
+// После этого будет переводиться ВЕСЬ ТЕКСТ:
+// - заголовки
+// - кнопки
+// - абзацы
+// - подписи под фото
+// - сообщения alert()
+// ==========================================
+
+// Словарь переводов
+const siteTranslations = {
+    en: {
+        "Наша История Любви ❤️": "Our Love Story ❤️",
+        "Our Love Story ❤️": "Our Love Story ❤️",
+        "✨ Special Surprises ✨": "✨ Special Surprises ✨",
+        "Click the buttons below for romantic surprises ❤️": "Click the buttons below for romantic surprises ❤️",
+        "🔐 Secret Message": "🔐 Secret Message",
+        "🎥 Video Surprise": "🎥 Video Surprise",
+        "💍 Forever": "💍 Forever",
+        "🎰 Love Wheel": "🎰 Love Wheel",
+        "💌 Compliment": "💌 Compliment",
+        "💘 Love Meter": "💘 Love Meter",
+        "🎁 Gift Box": "🎁 Gift Box",
+        "🧠 Love Quiz": "🧠 Love Quiz",
+        "🎮 Mini Game": "🎮 Mini Game",
+        "🌙 Day/Night Mode": "🌙 Day/Night Mode",
+        "🎲 Date Idea Generator": "🎲 Date Idea Generator",
+        "💍 Countdown to Our Wedding": "💍 Countdown to Our Wedding",
+        "🎮 Memory Game": "🎮 Memory Game",
+        "🔐 Secret Password": "🔐 Secret Password",
+        "🎵 Ukrainian Love Playlist": "🎵 Ukrainian Love Playlist"
+    },
+
+    ru: {
+        "Our Love Story ❤️": "Наша История Любви ❤️",
+        "✨ Special Surprises ✨": "✨ Особенные Сюрпризы ✨",
+        "Click the buttons below for romantic surprises ❤️": "Нажми на кнопки для романтических сюрпризов ❤️",
+        "🔐 Secret Message": "🔐 Секретное Сообщение",
+        "🎥 Video Surprise": "🎥 Видео Сюрприз",
+        "💍 Forever": "💍 Навсегда",
+        "🎰 Love Wheel": "🎰 Колесо Любви",
+        "💌 Compliment": "💌 Комплимент",
+        "💘 Love Meter": "💘 Уровень Любви",
+        "🎁 Gift Box": "🎁 Подарок",
+        "🧠 Love Quiz": "🧠 Викторина",
+        "🎮 Mini Game": "🎮 Мини-Игра",
+        "🌙 Day/Night Mode": "🌙 День/Ночь",
+        "🎲 Date Idea Generator": "🎲 Генератор Идей Для Свиданий",
+        "💍 Countdown to Our Wedding": "💍 Таймер До Свадьбы",
+        "🎮 Memory Game": "🎮 Игра На Память",
+        "🔐 Secret Password": "🔐 Секретный Пароль",
+        "🎵 Ukrainian Love Playlist": "🎵 Украинский Плейлист"
+    },
+
+    ua: {
+        "Our Love Story ❤️": "Наша Історія Кохання ❤️",
+        "✨ Special Surprises ✨": "✨ Особливі Сюрпризи ✨",
+        "Click the buttons below for romantic surprises ❤️": "Натисни кнопки для романтичних сюрпризів ❤️",
+        "🔐 Secret Message": "🔐 Секретне Повідомлення",
+        "🎥 Video Surprise": "🎥 Відео Сюрприз",
+        "💍 Forever": "💍 Назавжди",
+        "🎰 Love Wheel": "🎰 Колесо Кохання",
+        "💌 Compliment": "💌 Комплімент",
+        "💘 Love Meter": "💘 Рівень Кохання",
+        "🎁 Gift Box": "🎁 Подарунок",
+        "🧠 Love Quiz": "🧠 Вікторина",
+        "🎮 Mini Game": "🎮 Міні-Гра",
+        "🌙 Day/Night Mode": "🌙 День/Ніч",
+        "🎲 Date Idea Generator": "🎲 Генератор Ідей Для Побачень",
+        "💍 Countdown to Our Wedding": "💍 Таймер До Весілля",
+        "🎮 Memory Game": "🎮 Гра На Пам'ять",
+        "🔐 Secret Password": "🔐 Секретний Пароль",
+        "🎵 Ukrainian Love Playlist": "🎵 Український Плейлист"
+    },
+
+    cz: {
+        "Our Love Story ❤️": "Náš Příběh Lásky ❤️",
+        "✨ Special Surprises ✨": "✨ Speciální Překvapení ✨",
+        "Click the buttons below for romantic surprises ❤️": "Klikni na tlačítka pro romantická překvapení ❤️",
+        "🔐 Secret Message": "🔐 Tajná Zpráva",
+        "🎥 Video Surprise": "🎥 Video Překvapení",
+        "💍 Forever": "💍 Navždy",
+        "🎰 Love Wheel": "🎰 Kolo Lásky",
+        "💌 Compliment": "💌 Kompliment",
+        "💘 Love Meter": "💘 Měřič Lásky",
+        "🎁 Gift Box": "🎁 Dárek",
+        "🧠 Love Quiz": "🧠 Kvíz Lásky",
+        "🎮 Mini Game": "🎮 Mini Hra",
+        "🌙 Day/Night Mode": "🌙 Den/Noc",
+        "🎲 Date Idea Generator": "🎲 Generátor Nápadů Na Rande",
+        "💍 Countdown to Our Wedding": "💍 Odpočet Do Svatby",
+        "🎮 Memory Game": "🎮 Paměťová Hra",
+        "🔐 Secret Password": "🔐 Tajné Heslo",
+        "🎵 Ukrainian Love Playlist": "🎵 Ukrajinský Playlist"
+    }
+};
+
+// Функция полного перевода страницы
+function translateEntirePage(lang) {
+    const dictionary = siteTranslations[lang];
+    if (!dictionary) return;
+
+    // Переводим ВСЕ текстовые узлы
+    document.querySelectorAll("*").forEach(element => {
+        // Пропускаем script/style
+        if (["SCRIPT", "STYLE", "IFRAME"].includes(element.tagName)) return;
+
+        // Переводим только элементы без вложенных HTML-элементов
+        if (element.children.length === 0) {
+            const text = element.textContent.trim();
+
+            if (dictionary[text]) {
+                element.textContent = dictionary[text];
+            }
+        }
+
+        // Перевод placeholder
+        if (element.placeholder && dictionary[element.placeholder]) {
+            element.placeholder = dictionary[element.placeholder];
+        }
+    });
+}
+
+// Переопределяем функцию смены языка
+function changeLanguage(lang) {
+    localStorage.setItem("loveLanguage", lang);
+    translateEntirePage(lang);
+}
+
+// Автозагрузка языка при открытии сайта
+document.addEventListener("DOMContentLoaded", function () {
+    const savedLang = localStorage.getItem("loveLanguage") || "en";
+
+    const selector = document.getElementById("languageSelector");
+    if (selector) {
+        selector.value = savedLang;
+    }
+
+    // Небольшая задержка, чтобы успели загрузиться все элементы
+    setTimeout(() => {
+        translateEntirePage(savedLang);
+    }, 500);
+});
