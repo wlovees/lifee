@@ -1,93 +1,46 @@
+// ❤️ Дата начала отношений
+const startDate = new Date("2026-01-03T00:00:00");
 
-if (window.Telegram && Telegram.WebApp) {
-  Telegram.WebApp.expand();
-}
-
-const startDate = new Date('2025-01-01T00:00:00');
-
+// ⏳ Таймер любви
 function updateTimer() {
-  const now = new Date();
-  const diff = now - startDate;
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor(diff / 3600000) % 24;
-  const minutes = Math.floor(diff / 60000) % 60;
-  document.getElementById('timer').innerHTML =
-    `Всего вместе:<br><b>${days}</b> дней, <b>${hours}</b> часов, <b>${minutes}</b> минут`;
-}
-updateTimer();
-setInterval(updateTimer, 60000);
+    const now = new Date();
+    const diff = now - startDate;
 
-// Hearts animation
-const canvas = document.getElementById('hearts');
-const ctx = canvas.getContext('2d');
-let hearts = [];
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
-function resize() {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-}
-addEventListener('resize', resize);
-resize();
+    const timer = document.getElementById("timer");
 
-function makeHeart() {
-  hearts.push({
-    x: Math.random() * canvas.width,
-    y: canvas.height + 20,
-    size: 10 + Math.random() * 20,
-    speed: 0.5 + Math.random() * 1.5,
-    alpha: 0.4 + Math.random() * 0.6
-  });
-}
-
-function drawHeart(x, y, s, a) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.scale(s / 20, s / 20);
-  ctx.globalAlpha = a;
-  ctx.fillStyle = '#ffb6d5';
-  ctx.beginPath();
-  ctx.moveTo(0, 6);
-  ctx.bezierCurveTo(0, 0, -10, 0, -10, 6);
-  ctx.bezierCurveTo(-10, 12, 0, 18, 0, 20);
-  ctx.bezierCurveTo(0, 18, 10, 12, 10, 6);
-  ctx.bezierCurveTo(10, 0, 0, 0, 0, 6);
-  ctx.fill();
-  ctx.restore();
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (Math.random() < 0.15) makeHeart();
-  hearts.forEach(h => {
-    h.y -= h.speed;
-    drawHeart(h.x, h.y, h.size, h.alpha);
-  });
-  hearts = hearts.filter(h => h.y > -30);
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Simple generated music
-let audioCtx;
-document.getElementById('musicBtn').addEventListener('click', () => {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const notes = [523.25, 659.25, 783.99, 659.25];
-    let t = audioCtx.currentTime;
-    for (let repeat = 0; repeat < 100; repeat++) {
-      for (const freq of notes) {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.value = freq;
-        gain.gain.value = 0.02;
-        osc.connect(gain).connect(audioCtx.destination);
-        osc.start(t);
-        osc.stop(t + 0.35);
-        t += 0.4;
-      }
+    if (timer) {
+        timer.innerHTML = `
+            <strong>Всего вместе:</strong><br>
+            ${days} дней, ${hours} часов, ${minutes} минут
+        `;
     }
-    document.getElementById('musicBtn').textContent = '🎵 Музыка играет';
-    document.getElementById('musicBtn').disabled = true;
-  }
-});
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// ✨ Падающие сердечки
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("floating-heart");
+
+    const hearts = ["❤️", "💖", "💕", "💘", "💝"];
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 30) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+}
+
+// Создаём сердечки каждые 500 мс
+setInterval(createHeart, 500);
