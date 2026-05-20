@@ -1305,3 +1305,55 @@ window.addEventListener("load", function () {
     document.addEventListener("click", startMusic, { once: true });
     document.addEventListener("touchstart", startMusic, { once: true });
 });
+
+// ==========================================
+// 🎬 LOVE MOVIE TRAILER INTRO
+// ==========================================
+
+function startLoveMovieTrailer() {
+    const trailer = document.getElementById("movieTrailer");
+    const text = document.getElementById("trailerText");
+
+    if (!trailer || !text) return;
+
+    const scenes = [
+        "In a world full of billions of people...",
+        "One heart found its perfect match...",
+        "One smile changed everything...",
+        "One love story began on January 3, 2026...",
+        "And it will last forever...",
+        "THE GREATEST LOVE STORY EVER TOLD ❤️"
+    ];
+
+    let index = 0;
+
+    function showNextScene() {
+        if (index >= scenes.length) {
+            setTimeout(() => {
+                trailer.style.opacity = "0";
+
+                setTimeout(() => {
+                    trailer.remove();
+                }, 2000);
+            }, 3000);
+            return;
+        }
+
+        text.classList.remove("show");
+
+        setTimeout(() => {
+            text.textContent = scenes[index];
+            text.classList.add("show");
+            index++;
+
+            setTimeout(showNextScene, 3500);
+        }, 800);
+    }
+
+    showNextScene();
+}
+
+// Запуск после полной загрузки страницы
+window.addEventListener("load", function () {
+    setTimeout(startLoveMovieTrailer, 1000);
+});
