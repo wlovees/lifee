@@ -396,29 +396,92 @@ function generateDateIdea() {
     alert("💖 Идея для свидания:\n\n" + idea);
 }
 
-// 💍 Таймер до свадьбы (5 лет)
+/* =========================================================
+   💍 ADVANCED WEDDING COUNTDOWN
+   Показывает: годы, месяцы, дни, часы, минуты и секунды
+   ЗАМЕНИ ИМ ЭТОТ СТАРЫЙ КОД countdownToWedding()
+========================================================= */
+
 function updateWeddingCountdown() {
-    const el = document.getElementById("weddingCountdown");
-    if (!el) return;
+    const weddingElement = document.getElementById("weddingCountdown");
+    if (!weddingElement) return;
 
-    const weddingDate = new Date();
-    weddingDate.setFullYear(weddingDate.getFullYear() + 5);
+    // 📅 Дата свадьбы (ровно через 5 лет)
+    // Измени на свою дату, если нужно
+    const weddingDate = new Date("2031-01-03T00:00:00");
 
-    function update() {
-        const now = new Date();
-        const diff = weddingDate - now;
+    const now = new Date();
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const years = Math.floor(days / 365);
-        const remainingDays = days % 365;
-
-        el.innerHTML =
-            `💍 ${years} years and ${remainingDays} days left until our wedding ❤️`;
+    // Если дата уже наступила
+    if (now >= weddingDate) {
+        weddingElement.innerHTML = "💍 Today is our wedding day! ❤️";
+        return;
     }
 
-    update();
-    setInterval(update, 1000);
+    // ==========================================
+    // 📆 Расчёт лет, месяцев, дней, часов, минут, секунд
+    // ==========================================
+    let years = weddingDate.getFullYear() - now.getFullYear();
+    let months = weddingDate.getMonth() - now.getMonth();
+    let days = weddingDate.getDate() - now.getDate();
+    let hours = weddingDate.getHours() - now.getHours();
+    let minutes = weddingDate.getMinutes() - now.getMinutes();
+    let seconds = weddingDate.getSeconds() - now.getSeconds();
+
+    // Корректировка секунд
+    if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+    }
+
+    // Корректировка минут
+    if (minutes < 0) {
+        minutes += 60;
+        hours--;
+    }
+
+    // Корректировка часов
+    if (hours < 0) {
+        hours += 24;
+        days--;
+    }
+
+    // Корректировка дней
+    if (days < 0) {
+        // Последний день предыдущего месяца
+        const prevMonthLastDay = new Date(
+            weddingDate.getFullYear(),
+            weddingDate.getMonth(),
+            0
+        ).getDate();
+
+        days += prevMonthLastDay;
+        months--;
+    }
+
+    // Корректировка месяцев
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+
+    // ==========================================
+    // 💖 Вывод красивого таймера
+    // ==========================================
+    weddingElement.innerHTML =
+        `💍 ${years} years, ` +
+        `${months} months, ` +
+        `${days} days, ` +
+        `${hours} hours, ` +
+        `${minutes} minutes, ` +
+        `${seconds} seconds left until our wedding ❤️`;
 }
+
+// ==========================================
+// 🚀 Запуск таймера
+// ==========================================
+updateWeddingCountdown();
+setInterval(updateWeddingCountdown, 1000);
 
 // 🎮 Игра на поиск одинаковых сердечек
 function startMemoryGame() {
