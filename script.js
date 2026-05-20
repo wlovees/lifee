@@ -1158,3 +1158,34 @@ function startProposalCelebration() {
         }, i * 100);
     }
 }
+
+// ==========================================
+// 🕰️ TIME CAPSULE LETTER
+// Письмо откроется только через 1 год
+// ==========================================
+
+function openTimeCapsule() {
+    // Дата начала отсчёта
+    const startDate = new Date("2026-05-20");
+
+    // Дата открытия = через 1 год
+    const unlockDate = new Date(startDate);
+    unlockDate.setFullYear(unlockDate.getFullYear() + 1);
+
+    const now = new Date();
+
+    // Если ещё рано открывать письмо
+    if (now < unlockDate) {
+        const diff = unlockDate - now;
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        alert(
+            "🔒 This letter is still locked.\n\n" +
+            "It will open in " + days + " days. ❤️"
+        );
+        return;
+    }
+
+    // Сообщение, которое откроется через год
+    alert("❤️ Я все еще люблю тебя ❤️");
+}
