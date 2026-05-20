@@ -1191,19 +1191,68 @@ function openTimeCapsule() {
 }
 
 /* =========================================================
-   🕰️ TIME CAPSULE LIVE COUNTDOWN
-   Добавь этот код В КОНЕЦ файла script.js
-   (после функции openTimeCapsule)
+   🕰️ TIME CAPSULE LETTER + LIVE COUNTDOWN
+   ВСТАВЬ ЭТО В САМЫЙ КОНЕЦ ФАЙЛА script.js
 ========================================================= */
 
-// Создаем блок с обратным отсчетом на странице
+// ==========================================
+// 💌 ОТКРЫТЬ ПИСЬМО ЧЕРЕЗ 1 ГОД
+// ==========================================
+function openTimeCapsule() {
+    // Дата начала отсчёта
+    // Измени на любую дату, с которой хочешь считать 1 год
+    const startDate = new Date("2026-05-20");
+
+    // Дата открытия = через 1 год
+    const unlockDate = new Date(startDate);
+    unlockDate.setFullYear(unlockDate.getFullYear() + 1);
+
+    const now = new Date();
+
+    // Если ещё рано открывать письмо
+    if (now < unlockDate) {
+        const diff = unlockDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+            (diff % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+            (diff % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+        const seconds = Math.floor(
+            (diff % (1000 * 60)) /
+            1000
+        );
+
+        alert(
+            "🔒 This letter is still locked.\n\n" +
+            "⏳ Time left:\n" +
+            days + " days, " +
+            hours + " hours, " +
+            minutes + " minutes, " +
+            seconds + " seconds ❤️"
+        );
+        return;
+    }
+
+    // Сообщение, которое откроется через год
+    alert("❤️ Я все еще люблю тебя ❤️");
+}
+
+// ==========================================
+// 🕰️ СОЗДАНИЕ БЛОКА ОБРАТНОГО ОТСЧЁТА
+// ==========================================
 function createTimeCapsuleCountdown() {
-    // Если блок уже существует — ничего не делаем
+    // Если блок уже существует — не создаём второй раз
     if (document.getElementById("timeCapsuleCountdown")) return;
 
     const container = document.querySelector(".container");
     if (!container) return;
 
+    // Создаём новый раздел
     const section = document.createElement("section");
     section.className = "card center";
     section.innerHTML = `
@@ -1215,17 +1264,19 @@ function createTimeCapsuleCountdown() {
         </div>
     `;
 
-    // Добавляем блок в конец сайта
+    // Добавляем раздел в конец сайта
     container.appendChild(section);
 }
 
-// Обновляем таймер каждую секунду
+// ==========================================
+// ⏳ ОБНОВЛЕНИЕ ТАЙМЕРА КАЖДУЮ СЕКУНДУ
+// ==========================================
 function updateTimeCapsuleCountdown() {
     const countdownElement = document.getElementById("timeCapsuleCountdown");
     if (!countdownElement) return;
 
-    // Та же дата, что и в openTimeCapsule()
-    const startDate = new Date("2026-05-20");
+    // Дата начала отсчёта (должна совпадать с openTimeCapsule)
+    const startDate = new Date("2025-05-20");
 
     // Дата открытия = через 1 год
     const unlockDate = new Date(startDate);
@@ -1234,10 +1285,9 @@ function updateTimeCapsuleCountdown() {
     const now = new Date();
     const diff = unlockDate - now;
 
-    // Если письмо уже доступно
+    // Если письмо уже можно открыть
     if (diff <= 0) {
-        countdownElement.innerHTML =
-            "💌 The letter is now unlocked! ❤️";
+        countdownElement.innerHTML = "💌 The letter is now unlocked! ❤️";
         return;
     }
 
@@ -1256,7 +1306,7 @@ function updateTimeCapsuleCountdown() {
         1000
     );
 
-    // Показываем живой отсчет
+    // Показываем живой обратный отсчёт
     countdownElement.innerHTML =
         `⏳ ${days} days, ` +
         `${hours} hours, ` +
@@ -1265,15 +1315,8 @@ function updateTimeCapsuleCountdown() {
 }
 
 // ==========================================
-// 🚀 ИНИЦИАЛИЗАЦИЯ
+// 🚀 ЗАПУСК
 // ==========================================
-document.addEventListener("DOMContentLoaded", function () {
-    // Создаем блок на странице
-    createTimeCapsuleCountdown();
-
-    // Обновляем сразу
-    updateTimeCapsuleCountdown();
-
-    // Обновляем каждую секунду
-    setInterval(updateTimeCapsuleCountdown, 1000);
-});
+createTimeCapsuleCountdown();
+updateTimeCapsuleCountdown();
+setInterval(updateTimeCapsuleCountdown, 1000);
