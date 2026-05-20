@@ -1281,3 +1281,26 @@ function updateTimeCapsuleCountdown() {
 createTimeCapsuleCountdown();
 updateTimeCapsuleCountdown();
 setInterval(updateTimeCapsuleCountdown, 1000);
+
+
+        // 🎵 Автоматическое воспроизведение музыки
+window.addEventListener("load", function () {
+    const music = document.getElementById("bgMusic");
+    if (!music) return;
+
+    // Громкость (от 0.0 до 1.0)
+    music.volume = 0.7;
+
+    // Функция запуска музыки
+    function startMusic() {
+        music.play().catch(() => {});
+    }
+
+    // Пытаемся запустить сразу
+    startMusic();
+
+    // Если браузер запретил автозапуск,
+    // музыка начнётся после первого касания
+    document.addEventListener("click", startMusic, { once: true });
+    document.addEventListener("touchstart", startMusic, { once: true });
+});
