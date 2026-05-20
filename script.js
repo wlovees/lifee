@@ -591,6 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
         selector.value = savedLang;
         changeLanguage(savedLang);
     }
+});
 
 // Функция полного перевода страницы
 function translateEntirePage(lang) {
