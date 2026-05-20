@@ -1189,3 +1189,91 @@ function openTimeCapsule() {
     // Сообщение, которое откроется через год
     alert("❤️ Я все еще люблю тебя ❤️");
 }
+
+/* =========================================================
+   🕰️ TIME CAPSULE LIVE COUNTDOWN
+   Добавь этот код В КОНЕЦ файла script.js
+   (после функции openTimeCapsule)
+========================================================= */
+
+// Создаем блок с обратным отсчетом на странице
+function createTimeCapsuleCountdown() {
+    // Если блок уже существует — ничего не делаем
+    if (document.getElementById("timeCapsuleCountdown")) return;
+
+    const container = document.querySelector(".container");
+    if (!container) return;
+
+    const section = document.createElement("section");
+    section.className = "card center";
+    section.innerHTML = `
+        <h2>🕰️ Letter Countdown</h2>
+        <p>Time left until the secret letter opens ❤️</p>
+        <div id="timeCapsuleCountdown"
+             style="font-size:1.6rem;font-weight:bold;margin-top:15px;">
+            Loading...
+        </div>
+    `;
+
+    // Добавляем блок в конец сайта
+    container.appendChild(section);
+}
+
+// Обновляем таймер каждую секунду
+function updateTimeCapsuleCountdown() {
+    const countdownElement = document.getElementById("timeCapsuleCountdown");
+    if (!countdownElement) return;
+
+    // Та же дата, что и в openTimeCapsule()
+    const startDate = new Date("2026-05-20");
+
+    // Дата открытия = через 1 год
+    const unlockDate = new Date(startDate);
+    unlockDate.setFullYear(unlockDate.getFullYear() + 1);
+
+    const now = new Date();
+    const diff = unlockDate - now;
+
+    // Если письмо уже доступно
+    if (diff <= 0) {
+        countdownElement.innerHTML =
+            "💌 The letter is now unlocked! ❤️";
+        return;
+    }
+
+    // Вычисляем дни, часы, минуты, секунды
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+        (diff % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+        (diff % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+    const seconds = Math.floor(
+        (diff % (1000 * 60)) /
+        1000
+    );
+
+    // Показываем живой отсчет
+    countdownElement.innerHTML =
+        `⏳ ${days} days, ` +
+        `${hours} hours, ` +
+        `${minutes} minutes, ` +
+        `${seconds} seconds ❤️`;
+}
+
+// ==========================================
+// 🚀 ИНИЦИАЛИЗАЦИЯ
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+    // Создаем блок на странице
+    createTimeCapsuleCountdown();
+
+    // Обновляем сразу
+    updateTimeCapsuleCountdown();
+
+    // Обновляем каждую секунду
+    setInterval(updateTimeCapsuleCountdown, 1000);
+});
