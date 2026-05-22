@@ -525,9 +525,11 @@ document.getElementById("rotateBtn").addEventListener("click", () => {
     playerRotate();
 });
 
-playerReset();
-updateScore();
-update();
+window.onload = () => {
+    playerReset();
+    updateScore();
+    update();
+};
 </script>
 
 <div class="mobile-controls">
