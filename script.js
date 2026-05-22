@@ -1313,3 +1313,25 @@ window.addEventListener("load", () => {
     update();
 
 });
+
+document.getElementById("leftBtn").addEventListener("click", () => {
+    playerMove(-1);
+});
+
+document.getElementById("rightBtn").addEventListener("click", () => {
+    playerMove(1);
+});
+
+document.getElementById("downBtn").addEventListener("click", () => {
+    playerDrop();
+});
+
+document.getElementById("rotateBtn").addEventListener("click", () => {
+    playerRotate();
+});
+
+window.onload = () => {
+    playerReset();
+    updateScore();
+    update();
+};
