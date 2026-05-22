@@ -576,6 +576,132 @@ document.getElementById("rotateBtn").addEventListener("click", () => {
         <button id="snakeRight">➡️</button>
     </div>
 </section>
+
+<script>
+const snakeCanvas = document.getElementById("snakeGame");
+const snakeCtx = snakeCanvas.getContext("2d");
+
+const box = 15;
+
+let snake = [
+    {x: 150, y: 150}
+];
+
+let direction = "RIGHT";
+
+let food = {
+    x: Math.floor(Math.random() * 20) * box,
+    y: Math.floor(Math.random() * 20) * box
+};
+
+let snakeScore = 0;
+
+function drawSnakeGame() {
+
+    snakeCtx.fillStyle = "black";
+    snakeCtx.fillRect(0, 0, 300, 300);
+
+    for(let i = 0; i < snake.length; i++) {
+
+        snakeCtx.fillStyle =
+            i === 0 ? "#ff4da6" : "#ff80bf";
+
+        snakeCtx.fillRect(
+            snake[i].x,
+            snake[i].y,
+            box,
+            box
+        );
+    }
+
+    snakeCtx.fillStyle = "red";
+
+    snakeCtx.beginPath();
+    snakeCtx.arc(
+        food.x + 7,
+        food.y + 7,
+        7,
+        0,
+        Math.PI * 2
+    );
+    snakeCtx.fill();
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if(direction === "LEFT") snakeX -= box;
+    if(direction === "UP") snakeY -= box;
+    if(direction === "RIGHT") snakeX += box;
+    if(direction === "DOWN") snakeY += box;
+
+    if(
+        snakeX === food.x &&
+        snakeY === food.y
+    ) {
+
+        snakeScore++;
+
+        document.getElementById(
+            "snakeScore"
+        ).innerText =
+            "Score: " + snakeScore + " ❤️";
+
+        food = {
+            x: Math.floor(Math.random() * 20) * box,
+            y: Math.floor(Math.random() * 20) * box
+        };
+
+    } else {
+
+        snake.pop();
+    }
+
+    const newHead = {
+        x: snakeX,
+        y: snakeY
+    };
+
+    if(
+        snakeX < 0 ||
+        snakeY < 0 ||
+        snakeX >= 300 ||
+        snakeY >= 300
+    ) {
+
+        clearInterval(game);
+
+        alert("💔 Game Over ❤️");
+    }
+
+    snake.unshift(newHead);
+}
+
+document.getElementById("snakeLeft")
+.onclick = () => {
+    if(direction !== "RIGHT")
+        direction = "LEFT";
+};
+
+document.getElementById("snakeUp")
+.onclick = () => {
+    if(direction !== "DOWN")
+        direction = "UP";
+};
+
+document.getElementById("snakeDown")
+.onclick = () => {
+    if(direction !== "UP")
+        direction = "DOWN";
+};
+
+document.getElementById("snakeRight")
+.onclick = () => {
+    if(direction !== "LEFT")
+        direction = "RIGHT";
+};
+
+const game = setInterval(drawSnakeGame, 120);
+</script>
   
 </body>
 </html>
