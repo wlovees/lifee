@@ -1314,23 +1314,24 @@ window.addEventListener("load", () => {
 
 });
 
-document.getElementById("leftBtn").addEventListener("click", () => {
-    playerMove(-1);
-});
-
-document.getElementById("rightBtn").addEventListener("click", () => {
-    playerMove(1);
-});
-
-document.getElementById("downBtn").addEventListener("click", () => {
-    playerDrop();
-});
-
-document.getElementById("rotateBtn").addEventListener("click", () => {
-    playerRotate();
-});
-
 window.onload = () => {
+
+    document.getElementById("leftBtn").addEventListener("click", () => {
+        playerMove(-1);
+    });
+
+    document.getElementById("rightBtn").addEventListener("click", () => {
+        playerMove(1);
+    });
+
+    document.getElementById("downBtn").addEventListener("click", () => {
+        playerDrop();
+    });
+
+    document.getElementById("rotateBtn").addEventListener("click", () => {
+        playerRotate();
+    });
+
     playerReset();
     updateScore();
     update();
