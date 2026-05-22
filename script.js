@@ -1502,3 +1502,123 @@ window.addEventListener("load", () => {
     setInterval(drawSnakeGame, 120);
 
 });
+
+// =================================
+// LOVE SNAKE
+// =================================
+
+window.addEventListener("load", () => {
+
+const canvas = document.getElementById("snakeGame");
+const ctx = canvas.getContext("2d");
+
+const scoreText = document.getElementById("snakeScore");
+
+const box = 15;
+
+let snake = [
+    {x: 150, y: 150}
+];
+
+let food = {
+    x: Math.floor(Math.random() * 20) * box,
+    y: Math.floor(Math.random() * 20) * box
+};
+
+let direction = "RIGHT";
+let score = 0;
+
+// controls
+
+document.getElementById("snakeLeft").onclick = () => {
+    if(direction !== "RIGHT") direction = "LEFT";
+};
+
+document.getElementById("snakeRight").onclick = () => {
+    if(direction !== "LEFT") direction = "RIGHT";
+};
+
+document.getElementById("snakeUp").onclick = () => {
+    if(direction !== "DOWN") direction = "UP";
+};
+
+document.getElementById("snakeDown").onclick = () => {
+    if(direction !== "UP") direction = "DOWN";
+};
+
+function draw(){
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,0,300,300);
+
+    // food
+    ctx.fillStyle = "#ff4da6";
+    ctx.fillRect(food.x, food.y, box, box);
+
+    // snake
+    for(let i = 0; i < snake.length; i++){
+
+        ctx.fillStyle =
+            i === 0 ? "#ff66cc" : "#ff99dd";
+
+        ctx.fillRect(
+            snake[i].x,
+            snake[i].y,
+            box,
+            box
+        );
+    }
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if(direction === "LEFT") snakeX -= box;
+    if(direction === "RIGHT") snakeX += box;
+    if(direction === "UP") snakeY -= box;
+    if(direction === "DOWN") snakeY += box;
+
+    // eat
+    if(snakeX === food.x && snakeY === food.y){
+
+        score++;
+
+        scoreText.innerHTML =
+            "Score: " + score + " ❤️";
+
+        food = {
+            x: Math.floor(Math.random() * 20) * box,
+            y: Math.floor(Math.random() * 20) * box
+        };
+
+    } else {
+
+        snake.pop();
+
+    }
+
+    const newHead = {
+        x: snakeX,
+        y: snakeY
+    };
+
+    // walls
+
+    if(
+        snakeX < 0 ||
+        snakeY < 0 ||
+        snakeX >= 300 ||
+        snakeY >= 300
+    ){
+
+        alert("💔 Game Over ❤️");
+        location.reload();
+
+    }
+
+    snake.unshift(newHead);
+
+}
+
+setInterval(draw, 120);
+
+});
