@@ -1322,27 +1322,38 @@ function rotatePiece(){
   currentPiece.shape = rotate(currentPiece.shape);
 }
 
-// 📱 MOBILE CONTROLS
+// 📱 MOBILE TETRIS CONTROLS
 
-document.getElementById("leftBtn")?.addEventListener("click", () => {
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+const downBtn = document.getElementById("downBtn");
+const rotateBtn = document.getElementById("rotateBtn");
+
+if (leftBtn) {
+  leftBtn.addEventListener("click", () => {
     currentPiece.x--;
     draw();
-});
+  });
+}
 
-document.getElementById("rightBtn")?.addEventListener("click", () => {
+if (rightBtn) {
+  rightBtn.addEventListener("click", () => {
     currentPiece.x++;
     draw();
-});
+  });
+}
 
-document.getElementById("downBtn")?.addEventListener("click", () => {
+if (downBtn) {
+  downBtn.addEventListener("click", () => {
     currentPiece.y++;
     draw();
-});
+  });
+}
 
-document.getElementById("rotateBtn")?.addEventListener("click", () => {
+if (rotateBtn) {
+  rotateBtn.addEventListener("click", () => {
     currentPiece.shape = rotate(currentPiece.shape);
     draw();
-});
-
-
+  });
+}
 
