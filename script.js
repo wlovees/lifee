@@ -1339,28 +1339,27 @@ document.getElementById("rotateBtn")?.addEventListener("click", () => {
 
 });
 
-// 📱 MOBILE TETRIS CONTROLS
+// 📱 MOBILE CONTROLS
 
-function simulateKey(key) {
-    document.dispatchEvent(
-        new KeyboardEvent("keydown", {
-            key: key
-        })
-    );
-}
-
-document.getElementById("leftBtn")?.addEventListener("touchstart", () => {
-    simulateKey("ArrowLeft");
+document.getElementById("leftBtn")?.addEventListener("click", () => {
+    currentPiece.x--;
+    draw();
 });
 
-document.getElementById("rightBtn")?.addEventListener("touchstart", () => {
-    simulateKey("ArrowRight");
+document.getElementById("rightBtn")?.addEventListener("click", () => {
+    currentPiece.x++;
+    draw();
 });
 
-document.getElementById("downBtn")?.addEventListener("touchstart", () => {
-    simulateKey("ArrowDown");
+document.getElementById("downBtn")?.addEventListener("click", () => {
+    currentPiece.y++;
+    draw();
 });
 
-document.getElementById("rotateBtn")?.addEventListener("touchstart", () => {
-    simulateKey("ArrowUp");
+document.getElementById("rotateBtn")?.addEventListener("click", () => {
+    currentPiece.shape = rotate(currentPiece.shape);
+    draw();
 });
+
+
+
