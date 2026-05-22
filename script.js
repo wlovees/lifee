@@ -1306,3 +1306,10 @@ window.addEventListener("load", function () {
     document.addEventListener("touchstart", startMusic, { once: true });
 });
 
+window.addEventListener("load", () => {
+
+    playerReset();
+    updateScore();
+    update();
+
+});
