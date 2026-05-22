@@ -1306,3 +1306,19 @@ window.addEventListener("load", function () {
     document.addEventListener("touchstart", startMusic, { once: true });
 });
 
+function moveLeft(){
+  currentPiece.x--;
+}
+
+function moveRight(){
+  currentPiece.x++;
+}
+
+function moveDown(){
+  currentPiece.y++;
+}
+
+function rotatePiece(){
+  currentPiece.shape = rotate(currentPiece.shape);
+}
+
