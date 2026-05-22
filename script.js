@@ -1336,3 +1336,168 @@ window.onload = () => {
     updateScore();
     update();
 };
+
+// ==========================================
+// 🐍 LOVE SNAKE MOBILE
+// ==========================================
+
+const snakeCanvas = document.getElementById("snakeGame");
+const snakeCtx = snakeCanvas.getContext("2d");
+
+const snakeBox = 15;
+
+let snake = [
+    {x: 10 * snakeBox, y: 10 * snakeBox}
+];
+
+let snakeDirection = "RIGHT";
+
+let snakeFood = {
+    x: Math.floor(Math.random() * 20) * snakeBox,
+    y: Math.floor(Math.random() * 20) * snakeBox
+};
+
+let snakeScore = 0;
+
+const snakeScoreText = document.getElementById("snakeScore");
+
+function drawSnakeGame(){
+
+    snakeCtx.fillStyle = "black";
+    snakeCtx.fillRect(0, 0, 300, 300);
+
+    // food
+    snakeCtx.fillStyle = "#ff4da6";
+    snakeCtx.fillRect(
+        snakeFood.x,
+        snakeFood.y,
+        snakeBox,
+        snakeBox
+    );
+
+    for(let i = 0; i < snake.length; i++){
+
+        snakeCtx.fillStyle =
+            i === 0 ? "#ff66cc" : "#ff99dd";
+
+        snakeCtx.fillRect(
+            snake[i].x,
+            snake[i].y,
+            snakeBox,
+            snakeBox
+        );
+    }
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if(snakeDirection === "LEFT") snakeX -= snakeBox;
+    if(snakeDirection === "UP") snakeY -= snakeBox;
+    if(snakeDirection === "RIGHT") snakeX += snakeBox;
+    if(snakeDirection === "DOWN") snakeY += snakeBox;
+
+    // eat food
+    if(
+        snakeX === snakeFood.x &&
+        snakeY === snakeFood.y
+    ){
+
+        snakeScore++;
+
+        snakeScoreText.innerHTML =
+            "Score: " + snakeScore + " ❤️";
+
+        snakeFood = {
+            x: Math.floor(Math.random() * 20) * snakeBox,
+            y: Math.floor(Math.random() * 20) * snakeBox
+        };
+
+    } else {
+        snake.pop();
+    }
+
+    const newHead = {
+        x: snakeX,
+        y: snakeY
+    };
+
+    // walls
+    if(
+        snakeX < 0 ||
+        snakeY < 0 ||
+        snakeX >= 300 ||
+        snakeY >= 300
+    ){
+
+        clearInterval(snakeGame);
+
+        alert(
+            "💔 Game Over\n\nBut I still love you ❤️"
+        );
+
+        return;
+    }
+
+    // self collision
+    for(let i = 1; i < snake.length; i++){
+
+        if(
+            snakeX === snake[i].x &&
+            snakeY === snake[i].y
+        ){
+
+            clearInterval(snakeGame);
+
+            alert(
+                "💔 Game Over\n\nLove never ends ❤️"
+            );
+
+            return;
+        }
+    }
+
+    snake.unshift(newHead);
+}
+
+// MOBILE BUTTONS
+
+document.getElementById("snakeLeft")
+.addEventListener("click", () => {
+
+    if(snakeDirection !== "RIGHT"){
+        snakeDirection = "LEFT";
+    }
+
+});
+
+document.getElementById("snakeUp")
+.addEventListener("click", () => {
+
+    if(snakeDirection !== "DOWN"){
+        snakeDirection = "UP";
+    }
+
+});
+
+document.getElementById("snakeDown")
+.addEventListener("click", () => {
+
+    if(snakeDirection !== "UP"){
+        snakeDirection = "DOWN";
+    }
+
+});
+
+document.getElementById("snakeRight")
+.addEventListener("click", () => {
+
+    if(snakeDirection !== "LEFT"){
+        snakeDirection = "RIGHT";
+    }
+
+});
+
+const snakeGame = setInterval(
+    drawSnakeGame,
+    120
+);
