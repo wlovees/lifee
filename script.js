@@ -1322,23 +1322,6 @@ function rotatePiece(){
   currentPiece.shape = rotate(currentPiece.shape);
 }
 
-document.getElementById("leftBtn")?.addEventListener("click", () => {
-    currentPiece.x--;
-});
-
-document.getElementById("rightBtn")?.addEventListener("click", () => {
-    currentPiece.x++;
-});
-
-document.getElementById("downBtn")?.addEventListener("click", () => {
-    currentPiece.y++;
-});
-
-document.getElementById("rotateBtn")?.addEventListener("click", () => {
-    currentPiece.shape = rotate(currentPiece.shape);
-
-});
-
 // 📱 MOBILE CONTROLS
 
 document.getElementById("leftBtn")?.addEventListener("click", () => {
