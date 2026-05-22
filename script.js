@@ -1497,7 +1497,8 @@ document.getElementById("snakeRight")
 
 });
 
-const snakeGame = setInterval(
-    drawSnakeGame,
-    120
-);
+window.addEventListener("load", () => {
+
+    setInterval(drawSnakeGame, 120);
+
+});
