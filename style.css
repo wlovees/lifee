@@ -324,3 +324,22 @@ section,
     }
 }
 
+.snake-controls{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:20px;
+}
+
+.snake-controls button{
+    width:75px;
+    height:75px;
+    border:none;
+    border-radius:20px;
+    font-size:32px;
+    background:#ff4da6;
+    color:white;
+    box-shadow:0 0 20px #ff4da6;
+}
+
