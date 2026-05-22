@@ -513,10 +513,10 @@ update();
 </script>
 
 <div class="mobile-controls">
-  <button onclick="moveLeft()">⬅️</button>
-  <button onclick="rotatePiece()">🔄</button>
-  <button onclick="moveRight()">➡️</button>
-  <button onclick="moveDown()">⬇️</button>
+  <button id="leftBtn">⬅️</button>
+  <button id="rotateBtn">🔄</button>
+  <button id="rightBtn">➡️</button>
+  <button id="downBtn">⬇️</button>
 </div>
 
 <style>
@@ -525,18 +525,17 @@ update();
   justify-content:center;
   gap:15px;
   margin-top:20px;
-  flex-wrap:wrap;
 }
 
 .mobile-controls button{
-  width:70px;
-  height:70px;
+  width:75px;
+  height:75px;
   border:none;
   border-radius:20px;
-  font-size:30px;
+  font-size:32px;
   background:#ff4da6;
   color:white;
-  box-shadow:0 0 15px #ff4da6;
+  box-shadow:0 0 20px #ff4da6;
 }
 </style>
   
