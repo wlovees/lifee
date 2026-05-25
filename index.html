@@ -600,6 +600,9 @@ document.getElementById("rotateBtn").addEventListener("click", () => {
 const snakeCanvas = document.getElementById("snakeGame");
 const snakeCtx = snakeCanvas.getContext("2d");
 
+snakeCtx.fillStyle = "black";
+snakeCtx.fillRect(0, 0, 300, 300);  
+
 const box = 15;
 
 let snake = [
