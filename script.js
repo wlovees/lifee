@@ -1341,178 +1341,9 @@ window.onload = () => {
 // 🐍 LOVE SNAKE MOBILE
 // ==========================================
 
+<script>
 const snakeCanvas = document.getElementById("snakeGame");
 const snakeCtx = snakeCanvas.getContext("2d");
-
-const snakeBox = 15;
-
-let snake = [
-    {x: 10 * snakeBox, y: 10 * snakeBox}
-];
-
-let snakeDirection = "RIGHT";
-
-let snakeFood = {
-    x: Math.floor(Math.random() * 20) * snakeBox,
-    y: Math.floor(Math.random() * 20) * snakeBox
-};
-
-let snakeScore = 0;
-
-const snakeScoreText = document.getElementById("snakeScore");
-
-function drawSnakeGame(){
-
-    snakeCtx.fillStyle = "black";
-    snakeCtx.fillRect(0, 0, 300, 300);
-
-    // food
-    snakeCtx.fillStyle = "#ff4da6";
-    snakeCtx.fillRect(
-        snakeFood.x,
-        snakeFood.y,
-        snakeBox,
-        snakeBox
-    );
-
-    for(let i = 0; i < snake.length; i++){
-
-        snakeCtx.fillStyle =
-            i === 0 ? "#ff66cc" : "#ff99dd";
-
-        snakeCtx.fillRect(
-            snake[i].x,
-            snake[i].y,
-            snakeBox,
-            snakeBox
-        );
-    }
-
-    let snakeX = snake[0].x;
-    let snakeY = snake[0].y;
-
-    if(snakeDirection === "LEFT") snakeX -= snakeBox;
-    if(snakeDirection === "UP") snakeY -= snakeBox;
-    if(snakeDirection === "RIGHT") snakeX += snakeBox;
-    if(snakeDirection === "DOWN") snakeY += snakeBox;
-
-    // eat food
-    if(
-        snakeX === snakeFood.x &&
-        snakeY === snakeFood.y
-    ){
-
-        snakeScore++;
-
-        snakeScoreText.innerHTML =
-            "Score: " + snakeScore + " ❤️";
-
-        snakeFood = {
-            x: Math.floor(Math.random() * 20) * snakeBox,
-            y: Math.floor(Math.random() * 20) * snakeBox
-        };
-
-    } else {
-        snake.pop();
-    }
-
-    const newHead = {
-        x: snakeX,
-        y: snakeY
-    };
-
-    // walls
-    if(
-        snakeX < 0 ||
-        snakeY < 0 ||
-        snakeX >= 300 ||
-        snakeY >= 300
-    ){
-
-        clearInterval(snakeGame);
-
-        alert(
-            "💔 Game Over\n\nBut I still love you ❤️"
-        );
-
-        return;
-    }
-
-    // self collision
-    for(let i = 1; i < snake.length; i++){
-
-        if(
-            snakeX === snake[i].x &&
-            snakeY === snake[i].y
-        ){
-
-            clearInterval(snakeGame);
-
-            alert(
-                "💔 Game Over\n\nLove never ends ❤️"
-            );
-
-            return;
-        }
-    }
-
-    snake.unshift(newHead);
-}
-
-// MOBILE BUTTONS
-
-document.getElementById("snakeLeft")
-.addEventListener("click", () => {
-
-    if(snakeDirection !== "RIGHT"){
-        snakeDirection = "LEFT";
-    }
-
-});
-
-document.getElementById("snakeUp")
-.addEventListener("click", () => {
-
-    if(snakeDirection !== "DOWN"){
-        snakeDirection = "UP";
-    }
-
-});
-
-document.getElementById("snakeDown")
-.addEventListener("click", () => {
-
-    if(snakeDirection !== "UP"){
-        snakeDirection = "DOWN";
-    }
-
-});
-
-document.getElementById("snakeRight")
-.addEventListener("click", () => {
-
-    if(snakeDirection !== "LEFT"){
-        snakeDirection = "RIGHT";
-    }
-
-});
-
-window.addEventListener("load", () => {
-
-    setInterval(drawSnakeGame, 120);
-
-});
-
-// =================================
-// LOVE SNAKE
-// =================================
-
-window.addEventListener("load", () => {
-
-const canvas = document.getElementById("snakeGame");
-const ctx = canvas.getContext("2d");
-
-const scoreText = document.getElementById("snakeScore");
 
 const box = 15;
 
@@ -1520,48 +1351,61 @@ let snake = [
     {x: 150, y: 150}
 ];
 
-let food = {
-    x: Math.floor(Math.random() * 20) * box,
-    y: Math.floor(Math.random() * 20) * box
-};
-
 let direction = "RIGHT";
-let score = 0;
 
-// controls
+let food = randomFood();
 
-document.getElementById("snakeLeft").onclick = () => {
-    if(direction !== "RIGHT") direction = "LEFT";
-};
+let snakeScore = 0;
 
-document.getElementById("snakeRight").onclick = () => {
-    if(direction !== "LEFT") direction = "RIGHT";
-};
+function randomFood() {
+    return {
+        x: Math.floor(Math.random() * 20) * box,
+        y: Math.floor(Math.random() * 20) * box
+    };
+}
 
-document.getElementById("snakeUp").onclick = () => {
-    if(direction !== "DOWN") direction = "UP";
-};
+function resetSnakeGame() {
 
-document.getElementById("snakeDown").onclick = () => {
-    if(direction !== "UP") direction = "DOWN";
-};
+    snake = [{x:150, y:150}];
 
-function draw(){
+    direction = "RIGHT";
 
-    ctx.fillStyle = "black";
-    ctx.fillRect(0,0,300,300);
+    food = randomFood();
+
+    snakeScore = 0;
+
+    document.getElementById(
+        "snakeScore"
+    ).innerText = "Score: 0 ❤️";
+}
+
+function drawSnakeGame() {
+
+    snakeCtx.fillStyle = "black";
+    snakeCtx.fillRect(0, 0, 300, 300);
 
     // food
-    ctx.fillStyle = "#ff4da6";
-    ctx.fillRect(food.x, food.y, box, box);
+    snakeCtx.fillStyle = "red";
+
+    snakeCtx.beginPath();
+
+    snakeCtx.arc(
+        food.x + 7,
+        food.y + 7,
+        7,
+        0,
+        Math.PI * 2
+    );
+
+    snakeCtx.fill();
 
     // snake
-    for(let i = 0; i < snake.length; i++){
+    for(let i = 0; i < snake.length; i++) {
 
-        ctx.fillStyle =
-            i === 0 ? "#ff66cc" : "#ff99dd";
+        snakeCtx.fillStyle =
+            i === 0 ? "#ff4da6" : "#ff80bf";
 
-        ctx.fillRect(
+        snakeCtx.fillRect(
             snake[i].x,
             snake[i].y,
             box,
@@ -1573,27 +1417,43 @@ function draw(){
     let snakeY = snake[0].y;
 
     if(direction === "LEFT") snakeX -= box;
-    if(direction === "RIGHT") snakeX += box;
     if(direction === "UP") snakeY -= box;
+    if(direction === "RIGHT") snakeX += box;
     if(direction === "DOWN") snakeY += box;
 
-    // eat
-    if(snakeX === food.x && snakeY === food.y){
+    // wall collision
+    if(
+        snakeX < 0 ||
+        snakeY < 0 ||
+        snakeX >= 300 ||
+        snakeY >= 300
+    ) {
 
-        score++;
+        alert("💔 Game Over ❤️");
 
-        scoreText.innerHTML =
-            "Score: " + score + " ❤️";
+        resetSnakeGame();
 
-        food = {
-            x: Math.floor(Math.random() * 20) * box,
-            y: Math.floor(Math.random() * 20) * box
-        };
+        return;
+    }
+
+    // eat food
+    if(
+        snakeX === food.x &&
+        snakeY === food.y
+    ) {
+
+        snakeScore++;
+
+        document.getElementById(
+            "snakeScore"
+        ).innerText =
+            "Score: " + snakeScore + " ❤️";
+
+        food = randomFood();
 
     } else {
 
         snake.pop();
-
     }
 
     const newHead = {
@@ -1601,24 +1461,45 @@ function draw(){
         y: snakeY
     };
 
-    // walls
-
-    if(
-        snakeX < 0 ||
-        snakeY < 0 ||
-        snakeX >= 300 ||
-        snakeY >= 300
-    ){
-
-        alert("💔 Game Over ❤️");
-        location.reload();
-
-    }
-
     snake.unshift(newHead);
-
 }
 
-setInterval(draw, 120);
+document.addEventListener("keydown", e => {
 
+    if(e.key === "ArrowLeft" && direction !== "RIGHT")
+        direction = "LEFT";
+
+    if(e.key === "ArrowUp" && direction !== "DOWN")
+        direction = "UP";
+
+    if(e.key === "ArrowRight" && direction !== "LEFT")
+        direction = "RIGHT";
+
+    if(e.key === "ArrowDown" && direction !== "UP")
+        direction = "DOWN";
 });
+
+// mobile buttons
+
+document.getElementById("snakeLeft").onclick = () => {
+    if(direction !== "RIGHT")
+        direction = "LEFT";
+};
+
+document.getElementById("snakeUp").onclick = () => {
+    if(direction !== "DOWN")
+        direction = "UP";
+};
+
+document.getElementById("snakeDown").onclick = () => {
+    if(direction !== "UP")
+        direction = "DOWN";
+};
+
+document.getElementById("snakeRight").onclick = () => {
+    if(direction !== "LEFT")
+        direction = "RIGHT";
+};
+
+setInterval(drawSnakeGame, 120);
+</script>
