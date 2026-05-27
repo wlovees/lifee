@@ -1341,7 +1341,6 @@ window.onload = () => {
 // 🐍 LOVE SNAKE MOBILE
 // ==========================================
 
-<script>
 const snakeCanvas = document.getElementById("snakeGame");
 const snakeCtx = snakeCanvas.getContext("2d");
 
@@ -1502,4 +1501,4 @@ document.getElementById("snakeRight").onclick = () => {
 };
 
 setInterval(drawSnakeGame, 120);
-</script>
+
